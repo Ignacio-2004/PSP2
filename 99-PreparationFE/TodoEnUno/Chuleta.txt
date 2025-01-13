@@ -1,0 +1,3 @@
+ejecutable1 --> Pipe texto
+ejecutable12 & ejecutable13 --> FIFO texto
+ejecutable14 & ejecutable15 --> Signals

@@ -1,0 +1,14 @@
+// Clase Principal
+public class HiloCajeroAutomatico {
+
+ public static void main(String[] args)
+ {
+
+ // Código de la clase principal
+
+    HiloIngresarDinero padre = new HiloSacarDinero(new CuentaBancaria,"Padre",200);
+    HiloSacarDinero madre = new HiloSacarDinero(new CuentaBancaria,"Madre",800);
+    
+
+ }
+}

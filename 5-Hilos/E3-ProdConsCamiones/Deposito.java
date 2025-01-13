@@ -26,7 +26,7 @@ public class Deposito {
 
     }
 
-    public synchronized void getFuel(String id){
+    public synchronized int getFuel(String id){
 
         while (runOutOf) {
             try {
@@ -43,6 +43,8 @@ public class Deposito {
         System.out.println("Camion("+id+") carga: "+fuel+" litros");
 
         notifyAll();
+
+        return fuel;
 
     }
 

@@ -15,7 +15,7 @@ public class Camion extends Thread{
     @Override
     public void run(){
 
-        for(int i=0; i<5;i++){
+        for(int i=0; i<1;i++){
             litrosTotales+=dep.getFuel(id);
             try {
                 Thread.sleep(100);

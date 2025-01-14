@@ -28,7 +28,7 @@ public class Gestor {
             System.out.println("Caja("+id+") termino de atender al cliente:"+cli.id);
         }
 
-        if(cliente==null){
+        while(cliente==null){
 
             try {
                 wait();

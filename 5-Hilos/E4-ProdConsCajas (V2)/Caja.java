@@ -13,17 +13,12 @@ public class Caja extends Thread{
     @Override
     public void run(){
 
-        for (int i = 0; i < 1; ){
+        do{
             cliente = gest.siguienteCliente(id,cliente);
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {}
-
-            if (cliente == null) {
-                i=1;
-            }
-
-        }
+        }while(cliente != null);
 
     }
     

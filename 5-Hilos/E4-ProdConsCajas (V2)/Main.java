@@ -6,7 +6,7 @@ public class Main {
 
         Caja c = new Caja(01, g);
         Caja c2 = new Caja(02, g);
-        Caja c3 = new Caja(03, g);
+        Caja c3 = new Caja(10, g);
 
         CreadorClientes cc = new CreadorClientes(g);
 

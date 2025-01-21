@@ -18,7 +18,7 @@ public class Caja extends Thread{
         do{
             cliente = gest.siguienteCliente(id,cliente);
             try {
-                Thread.sleep(5000);
+                Thread.sleep(id*1000);
             } catch (InterruptedException e) {}
             c++;
         }while(cliente != null);

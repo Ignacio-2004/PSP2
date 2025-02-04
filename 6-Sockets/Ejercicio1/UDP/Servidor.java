@@ -1,36 +1,28 @@
 import java.io.*;
 import java.net.*;
 
-public class Servidor {
-    
-    private final static int PUERTO = 5555;
-    private static Socket socket = null;
-    private static InputStream ips = null;
-    private static DataInputStream dips = null;
-    private static OutputStream ops = null;
-    private static DataOutputStream dops = null;
-    
+public class Servidor {    
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         
-        ServerSocket ss = new ServerSocket(PUERTO);
-        do{
+        TCPClass sm = new TCPClass();
             
-            socket = ss.accept();
-            
-            ips = socket.getInputStream();
-            dips = new DataInputStream(ips);
+        Socket socket = sm.createServer();
+        int num  = Integer.parseInt(sm.read(socket));
 
-            int num  = dips.readInt();
-            num = num*3;
+        sm.setData("localhost", 55558);
 
-            ops = socket.getOutputStream();
-            dops = new DataOutputStream(ops);
+        Socket socket2 = sm.creaSocket();
 
-            dops.writeInt(num);
+        sm.write(socket2, String.valueOf(num));
 
-        }while(true);
-
+        num = Integer.parseInt(sm.read(socket2));
+        
+        sm.write(socket, String.valueOf(num));
+        sm.closeServer();
+        socket2.close();
     }
+
+
 
 }

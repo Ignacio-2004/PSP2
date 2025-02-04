@@ -14,7 +14,7 @@ public class TCPClass {
      * Default Builder conect to localhost through the gate 55555
      */
     public TCPClass(){
-        puerto = 55555;
+        puerto = 55556;
         ip = "localhost";
         ss = null;
     }
@@ -48,10 +48,9 @@ public class TCPClass {
 
     /**
      * Method that close the server
-     * @throws IOException
-     */
+    */
     public void closeServer() throws IOException{
-
+        
         ss.close();
         ss = null;
 

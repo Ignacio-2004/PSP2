@@ -1,47 +1,28 @@
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
-public class Servidor {
+public class Servidor {    
 
-    private final static int PUERTO = 55555;
+    public static void main(String[] args) throws IOException, InterruptedException {
+        
+        TCPClass sm = new TCPClass();
+            
+        Socket socket = sm.createServer();
+        int num  = Integer.parseInt(sm.read(socket));
 
-    public static void main(String[] args) throws IOException {
+        sm.setData("localhost", 55558);
 
-        final  ServerSocket SERVER = new ServerSocket(PUERTO);
-        InputStream in = null;
-        DataInputStream inData = null;
-        OutputStream out = null;
-        DataOutputStream outData = null;
+        Socket socket2 = sm.creaSocket();
 
-        do{
-            System.out.println("Esperando al cliente");
+        sm.write(socket2, String.valueOf(num));
 
-            Socket client = SERVER.accept();
-            in = client.getInputStream();
-            inData = new DataInputStream(in);
-
-
-            int num = factorial(inData.readInt());
-
-
-            out = client.getOutputStream();
-            outData = new DataOutputStream(out);
-
-            outData.writeInt(num);
-        }while(true);
+        num = Integer.parseInt(sm.read(socket2));
+        
+        sm.write(socket, String.valueOf(num));
+        sm.closeServer();
+        socket2.close();
     }
 
-    private static int factorial(int num){
-        if (num==0) {
-            return 1;
-        }else{
-            return num*factorial(num-1);
-        }
-    }
+
+
 }

@@ -1,26 +1,28 @@
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+
 
 public class Cliente2 {
-    public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
-        
-        TCPClass socketManager = new TCPClass("localhost",55558);
+    public static void main(String[] args) throws IOException {
+        UDPClass udpClass = new UDPClass(12346, InetAddress.getLocalHost());
+        udpClass.createServer();
 
-        Socket socket = socketManager.createServer();
+        DatagramPacket dp = udpClass.readDatagram();
+        System.out.println("Recived: "+new String(dp.getData()));
+        int num = factorial(Integer.parseInt(new String(dp.getData()).trim()));
 
-        int num = factorial(Integer.parseInt(socketManager.read(socket)));
+        udpClass.write(udpClass.getSs(),dp,String.valueOf(num));
+        System.out.println("Send");
 
-        socketManager.write(socket,String.valueOf(num));
-
-        socketManager.closeServer();
+        udpClass.closeServer();
 
     }
     private static int factorial(int num){
-        if (num==0) {
+        if (num == 1){
             return 1;
         }else{
-            return num*factorial(num-1);
+            return num * factorial(num - 1);
         }
     }
 }

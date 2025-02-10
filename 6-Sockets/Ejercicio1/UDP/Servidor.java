@@ -1,28 +1,25 @@
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
-public class Servidor {    
+public class Servidor {
+    public static void main(String[] args) throws IOException {
+        UDPClass udpClass = new UDPClass();
+        udpClass.createServer();
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+        DatagramPacket dp = udpClass.readDatagram();
+
+        udpClass.setData(12346, InetAddress.getLocalHost());
+        DatagramSocket ds = udpClass.createSocket();
+        udpClass.write(ds,new String(dp.getData()));
         
-        TCPClass sm = new TCPClass();
-            
-        Socket socket = sm.createServer();
-        int num  = Integer.parseInt(sm.read(socket));
+        String num = udpClass.readString(ds);
+        System.out.println("Recived: "+num);
+        udpClass.write(udpClass.getSs(),dp,num);
+        System.out.println("Send");
 
-        sm.setData("localhost", 55558);
-
-        Socket socket2 = sm.creaSocket();
-
-        sm.write(socket2, String.valueOf(num));
-
-        num = Integer.parseInt(sm.read(socket2));
-        
-        sm.write(socket, String.valueOf(num));
-        sm.closeServer();
-        socket2.close();
+        ds.close();
+        udpClass.closeServer();
     }
-
-
-
 }

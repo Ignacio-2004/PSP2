@@ -1,23 +1,21 @@
-import java.io.*;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.IOException;
+import java.net.DatagramSocket;
 import java.util.Scanner;
 
 public class Cliente {
 
-    public static void main(String[] args) throws UnknownHostException, IOException {
+    static Scanner keyboard = new Scanner(System.in);
 
-        Scanner s = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        TCPClass sm = new TCPClass();
-        Socket socket = sm.creaSocket();
-        System.out.print("Introduce el numero: ");
-        sm.write(socket, s.nextLine());
-        System.out.println();
+        UDPClass udpClass = new UDPClass();
 
-        System.out.println(sm.read(socket));
+        DatagramSocket ds = udpClass.createSocket();
 
-        socket.close();
+        System.out.print("Introduzca el numero: ");
+        udpClass.write(ds,String.valueOf(keyboard.nextInt()));
+
+        System.out.println(new String(udpClass.readDatagram(ds).getData()));
+        ds.close();
     }
-
 }

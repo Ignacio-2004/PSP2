@@ -44,6 +44,7 @@ public class UDPClass {
         if (ss != null){
             ss.close();
         }
+        ss=null;
     }
 
     /**

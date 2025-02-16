@@ -104,7 +104,8 @@ public class UDP {
     public void preparePackage(Object obj,DatagramPacket dp) throws IOException{
         objectStream.writeObject(obj);
         sendData = byteStream.toByteArray();
-        this.preparePackage(new String(sendData), dp);
+        sendMsg = new DatagramPacket(sendData, sendData.length, dp.getAddress, dp.getGate);
+
     }
 
     /**
@@ -117,7 +118,7 @@ public class UDP {
     public void preparePackage(Object obj,InetAddress ip, int gate) throws IOException{
         objectStream.writeObject(obj);
         sendData = byteStream.toByteArray();
-        this.preparePackage(new String(sendData), ip,gate);
+        sendMsg = new DatagramPacket(sendData, sendData.length, ip, gate);
     }
 
     /**

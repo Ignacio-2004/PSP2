@@ -22,7 +22,7 @@ public class Server{
             String msg = tcp.read();
 
             switch (msg) {
-                case "permision":
+                case "Permission":
                     System.out.println("Jugador conectado");
 
                     if (finish) {

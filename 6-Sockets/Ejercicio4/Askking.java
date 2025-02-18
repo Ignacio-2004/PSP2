@@ -12,7 +12,7 @@ public class Askking {
 
         if (tcp.read().equals("Accept")) {
             
-            System.out.print("Introduzca un número: ");
+            System.out.print("Jugador "+id+"> Introduzca un número: ");
             int num = scanner.nextInt();
 
             tcp.write(String.valueOf(num));
